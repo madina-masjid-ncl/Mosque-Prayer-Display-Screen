@@ -8,7 +8,7 @@ import {
   ScreenCard,
 } from "@/components/Screens/Components/ScreenCard"
 
-export default function NextPrayerTimeSlide() {
+export default function NextPrayerTimeSlide({className} : {className?: string}) {
   const {today, tomorrow} = useScreenMosqueData()
   const nextPrayerTime = useNextPrayerTime(today, tomorrow)
 
@@ -18,15 +18,18 @@ export default function NextPrayerTimeSlide() {
 
 
   return (
-    <ScreenCard className={`w-full bg-mosqueBrand-primary text-mosqueBrand-onPrimary`}>
-      <p
-        className={cn(
-          "text-xl md:text-5xl font-normal",
-        )}
+    <ScreenCard
+      className={cn(
+        `w-full bg-mosqueBrand-primary text-mosqueBrand-onPrimary `,
+        className,
+      )}
+    >
+      <p className={cn("text-xl md:text-5xl font-normal")}>Next Salah</p>
+      <div
+        className={
+          "flex flex-row gap-2 md:gap-8 items-center md:py-4 font-bold"
+        }
       >
-        Next Salah
-      </p>
-      <div className={"flex flex-row gap-8 items-center py-4 font-bold"}>
         <p className={cn("text-xl md:text-7xl ")}>
           {nextPrayerTime.prayerLabel}
         </p>

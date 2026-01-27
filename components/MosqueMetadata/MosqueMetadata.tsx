@@ -1,4 +1,5 @@
 import { MosqueMetadataType } from "@/types/MosqueDataType"
+import MosqueLogo from "@/components/MosqueMetadata/MosqueLogo"
 
 export default function MosqueMetadata({
   metadata,
@@ -9,11 +10,7 @@ export default function MosqueMetadata({
     <div className="md:flex text-mosqueBrand-onPrimary text-center md:text-left">
       <div className="mr-4 flex-shrink-0 self-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="m-2 max-w-full lg:max-w-lg max-h-16 mx-auto"
-          src={metadata.logo_url}
-          alt=""
-        />
+        <MosqueLogo metadata={metadata} />
       </div>
       <div>
         <h2 className="mt-3 md:mt-5 font-bold text-2xl md:text-3xl">
