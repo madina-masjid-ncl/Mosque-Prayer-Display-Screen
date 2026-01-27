@@ -233,28 +233,52 @@ You can buy one from the official suppliers: https://www.raspberrypi.com/product
 We recommend you buy a case with a fan or some heat-cooling solution - the screen will run all day so it's good to have
 a good cooling solution.
 
-### RPI set up steps
+### RPI 3 set up steps
 
-0. Install [Raspberry Pi OS](https://www.raspberrypi.com/software/) on the SD Card
-1. Install [chromium-browser](https://www.chromium.org/getting-involved/download-chromium) - **Do this step only if you
+1. Install [Raspberry Pi OS](https://www.raspberrypi.com/software/) on the SD Card
+2. Install [chromium-browser](https://www.chromium.org/getting-involved/download-chromium) - **Do this step only if you
    do not have Chromium**
-2. Open Terminal
-3. `cd .config`
-4. `sudo mkdir -p lxsession/LXDE-pi`
-5. `sudo nano lxsession/LXDE-pi/autostart`
-6. Add the following line at the end of the file:
+3. Open Terminal
+4. `cd .config`
+5. `sudo mkdir -p lxsession/LXDE-pi`
+6. `sudo nano lxsession/LXDE-pi/autostart`
+7. Add the following line at the end of the file:
 
-```sh
-@lxpanel --profile LXDE-pi
-@pcmanfm --desktop --profile LXDE-pi
-point-rpi
-@chromium-browser --noerrdialogs --noerrors --disable-session-crashed-bubble --disable-features=InfiniteSessionRestore --disable-infobars --start-fullscreen --start-maximized --app=https://mosque-prayer-display-screen.vercel.app
-```
+   ```sh
+   @lxpanel --profile LXDE-pi
+   @pcmanfm --desktop --profile LXDE-pi
+   point-rpi
+   @chromium-browser --noerrdialogs --noerrors --disable-session-crashed-bubble --disable-features=InfiniteSessionRestore --disable-infobars --start-fullscreen --start-maximized --app=https://mosque-prayer-display-screen.vercel.app
+   ```
+   
+   (make sure to replace the `--app=https://mosque-prayer-display-screen.vercel.app` with your URL)
 
-(make sure to replace the `--app=https://mosque-prayer-display-screen.vercel.app` with your URL)
+8. `sudo reboot`
+9. Once it reboots, it should start with start-up to your screen automatically.
 
-7. `sudo reboot`
-8. Once it reboots, it should start with start-up to your screen automatically.
+### RPI 4 set up steps
+
+1. Install [Raspberry Pi OS](https://www.raspberrypi.com/software/) on the SD Card
+2. Install [chromium-browser](https://www.chromium.org/getting-involved/download-chromium) - **Do this step only if you
+   do not have Chromium**
+3. Open Terminal
+4. `sudo nano .config/autostart/mosque-screen.desktop`
+5. Add the following line at the end of the file:
+   
+   ```sh
+   [Desktop Entry]
+   Type=Application
+   Name=Mosque Screen
+   Exec=/usr/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --kiosk --noerrdialogs --disable-infobars --disable-session-crashed-bubble --disable-restore-session-state --password-store=basic --use-mock-keychain --user-data-dir=/home/pi/chromium-kiosk --disable-features=TranslateUI --disable-component-update --disable-background-networking --disable-sync --disable-default-apps --disable-extensions --disable-notifications --disable-popup-blocking --disable-pinch --overscroll-history-navigation=0 --disable-dev-shm-usage --disable-gpu-shader-disk-cache --disk-cache-size=1 https://mosque-prayer-display-screen.vercel.app/
+   Terminal=false
+   X-GNOME-Autostart-enabled=true
+   .config/autostart/mosque-screen.desktop (END)
+   ```
+   
+   (make sure to replace the `--app=https://mosque-prayer-display-screen.vercel.app` with your URL)
+
+6. `sudo reboot`
+7. Once it reboots, it should start with start-up to your screen automatically.
 
 ## Still need help?
 
