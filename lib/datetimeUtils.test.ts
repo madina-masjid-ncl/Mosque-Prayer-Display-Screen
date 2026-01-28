@@ -16,7 +16,7 @@ import {
   dtNowFormatFull,
   dtFormatTimeToCustom,
   dtFormatTimeTo12hAmPm,
-  dtFormatDayNumber,
+  dtFormatDayOfWeek,
   dtFormatDayShort,
   dtFormatDayLong,
   dtFormatMonthNumber,
@@ -29,15 +29,15 @@ import {
   dtHijriLocale,
   dtHijriNow,
   dtHijriNowLocaleCustomFormat,
-  dtHijriNowFormatFull,
-  dtHijriFormatDayNumber,
+  dtHijriFormatDayOfWeek,
   dtHijriFormatDayShort,
   dtHijriFormatMonthShort,
   dtHijriFormatMonthLong,
-  dtHijriFormatYearLong,
   dtHijriFormatDateMonthYearLong,
   dtNowHijriFormatFull,
   dtFormatTimeTo12h,
+  dtHijriFormatDayOfMonth,
+  dtFormatDayOfMonth,
 } from "./datetimeUtils" // <- change this
 
 describe("date utils (moment + moment-hijri)", () => {
@@ -123,7 +123,8 @@ describe("date utils (moment + moment-hijri)", () => {
     })
 
     test("day formatters", () => {
-      expect(dtFormatDayNumber(FIXED_DATE_ISO)).toBe("4") // Thursday in ISO weekday? NOTE: moment 'd' is day of week (0-6). In UTC 2026-01-01 is Thu => 4.
+      expect(dtFormatDayOfWeek(FIXED_DATE_ISO)).toBe("4")
+      expect(dtFormatDayOfMonth(FIXED_DATE_ISO)).toBe("1")
       expect(dtFormatDayShort(FIXED_DATE_ISO)).toBe("Thu")
       expect(dtFormatDayLong(FIXED_DATE_ISO)).toBe("Thursday")
     })
@@ -173,7 +174,8 @@ describe("date utils (moment + moment-hijri)", () => {
     })
 
     test("hijri day/month formatters return strings", () => {
-      expect(dtHijriFormatDayNumber(FIXED_DATE_ISO)).toBe("4")
+      expect(dtHijriFormatDayOfWeek(FIXED_DATE_ISO)).toBe("4")
+      expect(dtHijriFormatDayOfMonth(FIXED_DATE_ISO)).toBe("12")
       expect(dtHijriFormatDayShort(FIXED_DATE_ISO)).toBe("Thu")
       expect(dtHijriFormatMonthShort(FIXED_DATE_ISO)).toBe("Raj")
       expect(dtHijriFormatMonthLong(FIXED_DATE_ISO)).toBe("Rajab")

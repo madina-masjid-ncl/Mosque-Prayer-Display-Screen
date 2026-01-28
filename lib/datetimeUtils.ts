@@ -53,11 +53,18 @@ export function dtFormatTimeTo12h(time?: string): string {
   return dtFormatTimeToCustom(time, "h:mm")
 }
 
-export function dtFormatDayNumber(date?: string | moment.Moment): string {
+export function dtFormatDayOfWeek(date?: string | moment.Moment): string {
   if (!date) {
     return ""
   }
   return dtLocale(date).format("d")
+}
+
+export function dtFormatDayOfMonth(date?: string | moment.Moment): string {
+  if (!date) {
+    return ""
+  }
+  return dtLocale(date).format("D")
 }
 
 export function dtFormatDayShort(date?: string | moment.Moment): string {
@@ -152,11 +159,18 @@ export function dtHijriNowFormatFull(): string {
   return dtHijriFormatDateMonthYearLong(dtHijriNow())
 }
 
-export function dtHijriFormatDayNumber(date?: string | moment.Moment): string {
+export function dtHijriFormatDayOfWeek(date?: string | moment.Moment): string {
   if (!date) {
     return ""
   }
   return dtHijriLocale(date).format("d")
+}
+
+export function dtHijriFormatDayOfMonth(date?: string | moment.Moment): string {
+  if (!date) {
+    return ""
+  }
+  return dtHijriLocale(date).format("iD")
 }
 
 export function dtHijriFormatDayShort(date?: string | moment.Moment): string {
@@ -174,13 +188,6 @@ export function dtHijriFormatMonthShort(date?: string | moment.Moment): string {
 }
 
 export function dtHijriFormatMonthLong(date?: string | moment.Moment): string {
-  if (!date) {
-    return ""
-  }
-  return dtHijriLocale(date).format("iMMMM")
-}
-
-export function dtHijriFormatYearLong(date?: string | moment.Moment): string {
   if (!date) {
     return ""
   }
