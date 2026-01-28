@@ -18,16 +18,16 @@ export default function NextPrayerTimeSlide() {
 
 
   return (
-    <ScreenCard className={`w-full`}>
+    <ScreenCard className={`w-full bg-mosqueBrand-primary text-mosqueBrand-onPrimary`}>
       <p
         className={cn(
-          "text-xl md:text-3xl font-normal text-mosqueBrand-onPrimaryAlt",
+          "text-xl md:text-5xl font-normal",
         )}
       >
         Next Salah
       </p>
       <div className={"flex flex-row gap-8 items-center py-4 font-bold"}>
-        <p className={cn("text-xl md:text-6xl ")}>
+        <p className={cn("text-xl md:text-7xl ")}>
           {nextPrayerTime.prayerLabel}
         </p>
         <p

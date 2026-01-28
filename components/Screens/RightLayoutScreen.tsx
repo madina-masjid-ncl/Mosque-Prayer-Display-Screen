@@ -5,12 +5,13 @@ import type {
 import {
   getJummahTimes,
   getMetaData,
+  getMosqueData,
   getPrayerTimesForToday,
   getPrayerTimesForTomorrow,
   getPrayerTimesForUpcomingDays,
 } from "@/services/MosqueDataService"
 import type { JummahTimes } from "@/types/JummahTimesType"
-import type { MosqueMetadataType } from "@/types/MosqueDataType"
+import type { MosqueData, MosqueMetadataType } from "@/types/MosqueDataType"
 import { ConfigurationJson } from "@/types/ConfigurationType"
 import Clock from "@/components/Clock/Clock"
 import Date from "@/components/Date/Date"
@@ -28,6 +29,7 @@ export default async function RightLayoutScreen({
 } : {
   config: ConfigurationJson
 }) {
+  const mosqueData: MosqueData = await getMosqueData()
   const today: DailyPrayerTime = await getPrayerTimesForToday()
   const tomorrow: DailyPrayerTime = await getPrayerTimesForTomorrow()
   const jummahTimes: JummahTimes = await getJummahTimes()
@@ -36,6 +38,7 @@ export default async function RightLayoutScreen({
 
   return (
     <ScreenMosqueDataProvider
+      mosqueData={mosqueData}
       today={today}
       tomorrow={tomorrow}
       jummahTimes={jummahTimes}
@@ -59,7 +62,6 @@ export default async function RightLayoutScreen({
               <PrayerTimes today={today} tomorrow={tomorrow} />
             </div>
           </div>
-          <ServiceWorker />
         </main>
         {config.feature.announcement.enabled && <Announcement />}
         <Blackout prayerTimeToday={today} />

@@ -105,6 +105,7 @@ const config: Config = {
         ],
         "5xl": ["calc(3rem * var(--font-scale, 1))", { lineHeight: "1" }],
         "6xl": ["calc(3.75rem * var(--font-scale, 1))", { lineHeight: "1" }],
+        "7xl": ["calc(4.5rem * var(--font-scale, 1))", { lineHeight: "1" }],
       },
     },
   },

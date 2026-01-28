@@ -22,7 +22,7 @@ export function ScreenTitleCard({ title, value, className = "" }: ScreenCardProp
 export function ScreenCard({ className, children } : {className?: string, children: React.ReactNode}) {
   return (
     <div
-      className={cn(`flex flex-col  justify-center bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimaryAlt p-4 lg:p-6 w-full rounded-2xl`, className)}
+      className={cn(`flex flex-col  justify-center bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimaryAlt p-4 lg:p-6 w-full rounded-lg`, className)}
     >
       {children}
     </div>
