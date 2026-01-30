@@ -59,7 +59,7 @@ export default async function MobileScreenLayout({
       mosqueMetadata={mosqueMetadata}
       upcomingPrayerDays={upcomingPrayerDays}
     >
-      <div className="bg-mosqueBrand min-h-screen min-w-full cursor-none">
+      <div className="bg-mosqueBrand min-h-screen min-w-full cursor-none overflow-x-hidden">
         <main className="md:p-5">
           <div className="md:grid md:grid-cols-8">
             <div className="md:col-span-3">
@@ -81,11 +81,11 @@ export default async function MobileScreenLayout({
             <div className="p-2">
               <NextPrayerTimeSlide
                 className={
-                  "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimaryAlt flex-row gap-4 justify-between px-4 py-4 pb-5"
+                  "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimaryAlt flex-row gap-4 justify-between px-4 py-4"
                 }
               />
             </div>
-            <div className="p-2">
+            <div className="p-0">
               <PrayerTimes today={today} tomorrow={tomorrow} />
             </div>
           </div>
