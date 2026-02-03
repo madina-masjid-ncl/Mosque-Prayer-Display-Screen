@@ -194,7 +194,7 @@ If you want to update your domain, you can do so by following the Vercel documen
 | KEY                         | VALUE                                                                            | DEFAULT                         | DESCRIPTION                                                                     |
 |-----------------------------|----------------------------------------------------------------------------------|---------------------------------|---------------------------------------------------------------------------------|
 | MOSQUE_API_ENDPOINT         | https://api.mosque.tech/mosque-data/1o9dngtGJbfkFGZK_M7xdlo2PtRuQknGEQU3FxpiPVbg | REQUIRED - NO DEFAULT           | Data from Mosque API                                                            |
-| BLACKOUT_PERIOD             | 13                                                                               | 13 minutes                      | How long your mosque screen dims / blacks out during congregation prayer        |
+| NEXT_PUBLIC_BLACKOUT_PERIOD | 13                                                                               | 13 minutes                      | How long your mosque screen dims / blacks out during congregation prayer        |
 | UPCOMING_PRAYER_DAY         | 3                                                                                | 3 upcoming days shown in slider | How many upcoming days it shows in the sliding section                          |
 | SLIDE_TRANSITION_TIME       | 7                                                                                | 7 seconds                       | How long each slide shows for in the sliding section                            |
 | THEME_COLOR_PRIMARY         | #0F715D                                                                          | #0F715D                         | The primary color to be used for the background of the screen                   |
@@ -250,7 +250,7 @@ a good cooling solution.
    point-rpi
    @chromium-browser --noerrdialogs --noerrors --disable-session-crashed-bubble --disable-features=InfiniteSessionRestore --disable-infobars --start-fullscreen --start-maximized --app=https://mosque-prayer-display-screen.vercel.app
    ```
-   
+
    (make sure to replace the `--app=https://mosque-prayer-display-screen.vercel.app` with your URL)
 
 8. `sudo reboot`
@@ -264,7 +264,7 @@ a good cooling solution.
 3. Open Terminal
 4. `sudo nano .config/autostart/mosque-screen.desktop`
 5. Add the following line at the end of the file:
-   
+
    ```sh
    [Desktop Entry]
    Type=Application
@@ -274,7 +274,7 @@ a good cooling solution.
    X-GNOME-Autostart-enabled=true
    .config/autostart/mosque-screen.desktop (END)
    ```
-   
+
    (make sure to replace the `--app=https://mosque-prayer-display-screen.vercel.app` with your URL)
 
 6. `sudo reboot`
