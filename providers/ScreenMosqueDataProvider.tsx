@@ -81,6 +81,7 @@ export function ScreenMosqueDataProvider({
         const res = await fetch("/api/data", { cache: "no-store" })
         if (!res.ok) throw new Error(`Failed /api/data: ${res.status}`)
         const mosqueData: MosqueData = await res.json()
+        console.log("loaded mosque data from /api/data", mosqueData)
 
         const derived = deriveFromMosqueData(mosqueData, 3)
 
