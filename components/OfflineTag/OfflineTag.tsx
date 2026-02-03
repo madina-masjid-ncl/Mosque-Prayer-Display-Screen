@@ -32,7 +32,7 @@ function OfflineTag() {
       id={"offline-tag"}
       className={cn(
         "rounded-lg px-4 py-2 items-center justify-between gap-2",
-        ifOffline ? "flex" : "hidden",
+        ifOffline ? "flex" : "opacity-0",
       )}
     >
       <span className={"rounded-[50px] bg-red-400 w-4 h-4"} />

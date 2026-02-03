@@ -1,9 +1,7 @@
 /// <reference no-default-lib="true" />
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
-import { defaultCache } from "@serwist/turbopack/worker"
 import {
-  CacheFirst,
   NetworkFirst,
   PrecacheEntry,
   RuntimeCaching,
@@ -31,10 +29,6 @@ const runtimeCaching: RuntimeCaching[] = [
     handler: new NetworkFirst({
       cacheName: "pages",
       networkTimeoutSeconds: 3,
-      // expiration: {
-      //   maxEntries: 60,
-      //   maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
-      // },
     }),
   },
 
@@ -43,10 +37,14 @@ const runtimeCaching: RuntimeCaching[] = [
     matcher: ({ url }) => url.pathname.startsWith("/_next/static/"),
     handler: new StaleWhileRevalidate({
       cacheName: "next-static",
-      // expiration: {
-      //   maxEntries: 200,
-      //   maxAgeSeconds: 30 * 24 * 60 * 60,
-      // },
+    }),
+  },
+
+  // Next.js static assets
+  {
+    matcher: ({ url }) => url.pathname.startsWith("/_next/image"),
+    handler: new StaleWhileRevalidate({
+      cacheName: "next-image",
     }),
   },
 
@@ -57,10 +55,6 @@ const runtimeCaching: RuntimeCaching[] = [
     handler: new NetworkFirst({
       cacheName: "api",
       networkTimeoutSeconds: 3,
-      // expiration: {
-      //   maxEntries: 200,
-      //   maxAgeSeconds: 24 * 60 * 60,
-      // },
     }),
   },
 ]
@@ -77,12 +71,6 @@ const serwist = new Serwist({
   runtimeCaching: runtimeCaching,
   fallbacks: {
     entries: [
-      // {
-      //   url: "/offline",
-      //   matcher({ request }) {
-      //     return request.destination === "document"
-      //   },
-      // },
     ],
   },
 })
