@@ -20,6 +20,7 @@ type Props = {
   showSunrise?: boolean
   showDate?: boolean
   showHijri?: boolean
+  highlightColor?: string
 }
 
 export async function TodayPrayerTime({
@@ -27,6 +28,7 @@ export async function TodayPrayerTime({
   showSunrise = false,
   showDate = false,
   showHijri = false,
+  highlightColor,
 }: Props) {
   const convertTime = (time: string) => dtFormatTimeToCustom(time, timeFormat)
 
@@ -87,18 +89,12 @@ export async function TodayPrayerTime({
     },
   ]
 
-  // if (showSunrise) {
-  //   currentSalahTimes = [
-  //     ...currentSalahTimes.slice(0, 1),
-  //     {
-  //       label: "Sunrise",
-  //       start: currentDailyPrayerTimes.sunrise_start,
-  //       congregation: null,
-  //       prayerIndex: -1,
-  //     },
-  //     ...currentSalahTimes.slice(1),
-  //   ]
-  // }
+  const isHighlighted = (prayerIndex: number) =>
+    nextPrayerTime.today && nextPrayerTime.prayerIndex === prayerIndex
+
+  const highlightStyle = highlightColor
+    ? { backgroundColor: `#${highlightColor}`, color: "#fff" }
+    : undefined
 
   return (
     <div className="PrayerTimeWidgetWrapper">
@@ -127,12 +123,15 @@ export async function TodayPrayerTime({
               <th
                 key={index}
                 className={cn(
-                  "min-w-[10px] w-24 text-sm md:text-base",
-                  nextPrayerTime.today &&
-                    nextPrayerTime.prayerIndex === value.prayerIndex
-                    ? "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary rounded-t-md"
-                    : "",
+                  "min-w-[10px] w-24  text-sm md:text-base",
+                  isHighlighted(value.prayerIndex) &&
+                    (highlightColor
+                      ? "rounded-t-md"
+                      : "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary rounded-t-md"),
                 )}
+                style={
+                  isHighlighted(value.prayerIndex) ? highlightStyle : undefined
+                }
               >
                 {value.label}
               </th>
@@ -153,11 +152,13 @@ export async function TodayPrayerTime({
                 key={index}
                 className={cn(
                   "min-w-[10px] w-24",
-                  nextPrayerTime.today &&
-                    nextPrayerTime.prayerIndex === value.prayerIndex
-                    ? "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary"
-                    : "",
+                  isHighlighted(value.prayerIndex) &&
+                    !highlightColor &&
+                    "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary",
                 )}
+                style={
+                  isHighlighted(value.prayerIndex) ? highlightStyle : undefined
+                }
               >
                 {value.start ? convertTime(value.start) : ""}
               </td>
@@ -177,11 +178,14 @@ export async function TodayPrayerTime({
                 key={index}
                 className={cn(
                   "min-w-[10px] w-24",
-                  nextPrayerTime.today &&
-                    nextPrayerTime.prayerIndex === value.prayerIndex
-                    ? "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary rounded-b-md"
-                    : "",
+                  isHighlighted(value.prayerIndex) &&
+                    (highlightColor
+                      ? "rounded-b-md"
+                      : "bg-mosqueBrand-primaryAlt text-mosqueBrand-onPrimary rounded-b-md"),
                 )}
+                style={
+                  isHighlighted(value.prayerIndex) ? highlightStyle : undefined
+                }
               >
                 {value.congregation ? convertTime(value.congregation) : ""}
               </td>
