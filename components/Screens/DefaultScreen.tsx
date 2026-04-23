@@ -52,10 +52,15 @@ export default async function DefaultScreen({
   })
 
   return (
-    <div className="bg-mosqueBrand min-h-screen min-w-full cursor-none">
-      <main className="md:p-5">
-        <div className="md:grid md:grid-cols-8">
-          <div className="md:col-span-3">
+    <div
+      className="bg-mosqueBrand h-screen min-w-full cursor-none"
+      style={{
+        ["--font-scale" as any]: String(1.8),
+      }}
+    >
+      <main className="md:p-5 h-full flex flex-col">
+        <div className="md:grid md:grid-cols-8 h-full">
+          <div className="md:col-span-3 flex-1">
             <div className="p-4 md:p-6">
               <Clock />
             </div>
@@ -69,7 +74,7 @@ export default async function DefaultScreen({
               <Notice />
             </div>
           </div>
-          <div className="p-4 md:p-6 md:col-span-5">
+          <div className="p-4 md:p-6 md:col-span-5 h-full">
             <PrayerTimes today={today} tomorrow={tomorrow} />
           </div>
         </div>
