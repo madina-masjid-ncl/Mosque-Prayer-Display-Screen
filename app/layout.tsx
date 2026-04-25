@@ -1,5 +1,6 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
+import Serwist from "@/app/Serwist"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -32,8 +33,8 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#0C5A4B" />
       </head>
-      <body className={`${inter.className} min-w-full min-h-screen`}>
-        {children}
+      <body className={`${inter.className} h-screen w-screen overflow-hidden`}>
+        <Serwist>{children}</Serwist>
       </body>
     </html>
   )

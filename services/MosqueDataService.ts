@@ -1,11 +1,12 @@
 import {
   DailyPrayerTime,
+  PrayerTime,
   UpcomingPrayerTimes,
-} from '@/types/DailyPrayerTimeType'
+} from "@/types/DailyPrayerTimeType"
 import { JummahTimes } from '@/types/JummahTimesType'
 import {
   MosqueData,
-  MosqueMetadataType,
+  MosqueMetadataType, ScreenData,
 } from '@/types/MosqueDataType'
 import { AnnouncementData } from '@/types/AnnouncementType'
 import { find } from 'lodash'
@@ -38,7 +39,7 @@ export async function getMosqueData (): Promise<MosqueData> {
 
     const data = await response.json()
 
-    // we do this so that the MosqueData type doesn't is strongly typed
+    // MOSQUE_API_ENDPOINT returns the flattened json, we need to unflatten
     data.config = unflattenObject(data.config)
 
     return data
@@ -90,6 +91,22 @@ export async function getPrayerTimesForUpcomingDays (
   }
 
   return data
+}
+
+export async function getAllScreenData(): Promise<ScreenData> {
+  const today: DailyPrayerTime = await getPrayerTimesForToday()
+  const tomorrow: DailyPrayerTime = await getPrayerTimesForTomorrow()
+  const jummahTimes: JummahTimes = await getJummahTimes()
+  const mosqueMetadata: MosqueMetadataType = await getMetaData()
+  const upcomingPrayerDays: UpcomingPrayerTimes[] = await getPrayerTimesForUpcomingDays()
+
+  return {
+    today: today,
+    tomorrow: tomorrow,
+    jummahTimes: jummahTimes,
+    mosqueMetadata: mosqueMetadata,
+    upcomingPrayerDays: upcomingPrayerDays,
+  }
 }
 
 export async function getCalendarPrintMonthlyPrayerTimesForYear (year: string): Promise<CalendarPrintMonthlyPrayerTimes[]> {

@@ -1,7 +1,7 @@
 import { DailyPrayerTime } from "@/types/DailyPrayerTimeType"
 import { dtLocale, dtNowLocale } from "@/lib/datetimeUtils"
 
-const blackoutPeriod = process.env.BLACKOUT_PERIOD ?? 13 // defaults to 13 minutes
+const blackoutPeriod = process.env.NEXT_PUBLIC_BLACKOUT_PERIOD ?? 13 // defaults to 13 minutes
 
 export function isBlackout(prayerTimes: DailyPrayerTime) {
   const currentTime = dtNowLocale()
@@ -27,9 +27,24 @@ export function isBlackout(prayerTimes: DailyPrayerTime) {
   return setBlackoutMode
 }
 
-export function getNextPrayer(today: DailyPrayerTime) {
-  const currentTime = dtNowLocale()
+export function getNextPrayer(today?: DailyPrayerTime, tomorrow?: DailyPrayerTime) {
+  let nextPrayertime = {
+    today: false,
+    prayerIndex: 0,
+    prayerLabel: getPrayerLabelFromIndex(0),
+    time: tomorrow?.fajr.congregation_start,
+  }
 
+  if (!today) {
+    return {
+      today: false,
+      prayerIndex: 0,
+      prayerLabel: "",
+      time: ""
+    }
+  }
+
+  const currentTime = dtNowLocale()
   const todaysTimes = [
     today.fajr.congregation_start,
     today.zuhr.congregation_start,
@@ -37,20 +52,22 @@ export function getNextPrayer(today: DailyPrayerTime) {
     today.maghrib.congregation_start,
     today.isha.congregation_start,
   ]
-
-  let nextPrayertime = {
-    today: false,
-    prayerIndex: 0,
-  }
-
   todaysTimes.forEach((time, index) => {
     if (currentTime < dtLocale(time, ["HH:mm"]) && !nextPrayertime.today) {
       nextPrayertime = {
         today: true,
         prayerIndex: index,
+        prayerLabel: getPrayerLabelFromIndex(index),
+        time: time,
       }
     }
   })
 
   return nextPrayertime
 }
+
+export function getPrayerLabelFromIndex(index: number): string {
+  return DailyPrayerLabels[index] ?? ""
+}
+
+export const DailyPrayerLabels = ["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"]

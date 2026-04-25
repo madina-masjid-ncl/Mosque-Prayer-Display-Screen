@@ -8,6 +8,13 @@ export const configurationDefaults : ConfigurationJson = {
     },
     prayer_time_tomorrow: {
       enabled: true,
+    },
+    screen: {
+      layout: "default",
+      slides: []
     }
+  },
+  accessibility: {
+    fontScale: 1
   }
 }
