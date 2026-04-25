@@ -22,6 +22,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "2k": "2560px",
+        "4k": "3840px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -83,29 +87,11 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontSize: {
-        xs: ["calc(0.75rem * var(--font-scale, 1))", { lineHeight: "calc(1rem * var(--font-scale, 1))" }],
-        sm: [
-          "calc(0.875rem * var(--font-scale, 1))",
-          { lineHeight: "calc(1.25rem * var(--font-scale, 1))" },
-        ],
-        base: ["calc(1rem * var(--font-scale, 1))", { lineHeight: "calc(1.5rem * var(--font-scale, 1))" }],
-        lg: [
-          "calc(1.125rem * var(--font-scale, 1))",
-          { lineHeight: "calc(1.75rem * var(--font-scale, 1))" },
-        ],
-        xl: ["calc(1.25rem * var(--font-scale, 1))", { lineHeight: "calc(1.75rem * var(--font-scale, 1))" }],
-        "2xl": ["calc(1.5rem * var(--font-scale, 1))", { lineHeight: "calc(2rem * var(--font-scale, 1))" }],
-        "3xl": [
-          "calc(1.875rem * var(--font-scale, 1))",
-          { lineHeight: "calc(2.25rem * var(--font-scale, 1))" },
-        ],
-        "4xl": [
-          "calc(2.25rem * var(--font-scale, 1))",
-          { lineHeight: "calc(2.5rem * var(--font-scale, 1))" },
-        ],
-        "5xl": ["calc(3rem * var(--font-scale, 1))", { lineHeight: "calc(1.2 * var(--font-scale, 1))" }],
-        "6xl": ["calc(3.75rem * var(--font-scale, 1))", { lineHeight: "calc(1.2 * var(--font-scale, 1))" }],
-        "7xl": ["calc(4.5rem * var(--font-scale, 1))", { lineHeight: "calc(1.2 * var(--font-scale, 1))" }],
+        "9xl": ["8rem", { lineHeight: "1.1" }], // 160px
+        "10xl": ["9rem", { lineHeight: "1.1" }], // 160px
+        "11xl": ["10rem", { lineHeight: "1.2" }], // 192px
+        "12xl": ["12rem", { lineHeight: "1.2" }], // 224px
+        "13xl": ["14rem", { lineHeight: "1.2" }], // 256px
       },
     },
   },

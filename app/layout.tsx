@@ -33,7 +33,7 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#0C5A4B" />
       </head>
-      <body className={`${inter.className} min-w-full min-h-screen`}>
+      <body className={`${inter.className} h-screen w-screen overflow-hidden`}>
         <Serwist>{children}</Serwist>
       </body>
     </html>

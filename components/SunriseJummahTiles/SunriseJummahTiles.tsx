@@ -1,6 +1,6 @@
 import { JummahTimes } from "@/types/JummahTimesType"
 import { dtFormatTimeTo12h } from "@/lib/datetimeUtils"
-import { ScreenTitleCard } from "@/components/Screens/Components/ScreenCard"
+import { InfoTile } from "@/components/ui/mosque-screen/InfoTile"
 
 export default function SunriseJummahTiles({
   sunrise,
@@ -9,21 +9,24 @@ export default function SunriseJummahTiles({
   sunrise: string
   jummahTimes: JummahTimes
 }) {
-
   return (
     <dl
-      className={[
-        "grid text-center w-full grid-flow-col auto-cols-fr gap-0 md:gap-3",
-      ].join(" ")}
+      className={`grid justify-items-stretch lg:grid-cols-${
+        jummahTimes.length + 1
+      } text-center gap-0 md:gap-3`}
     >
-      <ScreenTitleCard title={"Sunrise"} value={dtFormatTimeTo12h(sunrise)} />
+      <InfoTile label="Sunrise">
+        {dtFormatTimeTo12h(sunrise)}
+      </InfoTile>
 
       {jummahTimes.map((jummahTime, index) => (
-        <ScreenTitleCard
+        <InfoTile
+          label={jummahTime.label}
+          // valueClassName="text-xl lg:text-5xl"
           key={index}
-          title={jummahTime.label}
-          value={dtFormatTimeTo12h(jummahTime.time)}
-        />
+        >
+          {dtFormatTimeTo12h(jummahTime.time)}
+        </InfoTile>
       ))}
     </dl>
   )
