@@ -20,12 +20,12 @@ export function InfoTile({
         className,
       )}
     >
-      <dt className="font-medium text-sm md:text-2xl 2k:text-3xl 4k:text-5xl">
+      <dt className="font-medium text-sm md:text-2xl 2k:text-4xl 4k:text-6xl">
         {label}
       </dt>
       <dd
         className={cn(
-          `mt-[1.3vh] font-bold tracking-tight text-xl md:text-3xl 2k:text-4xl 4k:text-6xl`,
+          `mt-[1.3vh] font-bold tracking-tight text-xl md:text-4xl 2k:text-5xl 4k:text-7xl`,
           valueClassName,
         )}
       >
