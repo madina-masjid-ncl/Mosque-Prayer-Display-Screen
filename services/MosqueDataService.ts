@@ -40,7 +40,7 @@ export async function getMosqueData (): Promise<MosqueData> {
     const data = await response.json()
 
     // MOSQUE_API_ENDPOINT returns the flattened json, we need to unflatten
-    data.config = unflattenObject(data.config)
+    data.config = unflattenObject(data.config ?? {})
 
     return data
   }

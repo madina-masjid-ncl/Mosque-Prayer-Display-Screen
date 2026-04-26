@@ -9,8 +9,8 @@ export default function SunriseJummahTiles({
   sunrise: string
   jummahTimes: JummahTimes
 }) {
-  const sunriseJummahValue = "text-2xl md:text-5xl 2k:text-7xl 4k:text-13xl leading-tight"
-  const sunriseJummahLabel = "text-lg md:text-3xl 2k:text-5xl 4k:text-9xl"
+  const sunriseJummahValue = "text-lg md:text-5xl 2k:text-7xl 4k:text-9xl leading-tight"
+  const sunriseJummahLabel = "text-lg md:text-3xl 2k:text-5xl 4k:text-7xl"
 
   return (
     <dl
