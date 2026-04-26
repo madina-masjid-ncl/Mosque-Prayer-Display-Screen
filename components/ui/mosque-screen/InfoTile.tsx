@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 type InfoTileProps = {
   label: React.ReactNode
   children: React.ReactNode
+  labelClassName?: string
   valueClassName?: string
   className?: string
 }
@@ -10,6 +11,7 @@ type InfoTileProps = {
 export function InfoTile({
   label,
   children,
+  labelClassName = "",
   valueClassName = "",
   className = "",
 }: InfoTileProps) {
@@ -20,7 +22,7 @@ export function InfoTile({
         className,
       )}
     >
-      <dt className="font-medium text-sm md:text-2xl 2k:text-4xl 4k:text-6xl">
+      <dt className={cn("font-medium text-sm md:text-2xl 2k:text-4xl 4k:text-6xl", labelClassName)}>
         {label}
       </dt>
       <dd
