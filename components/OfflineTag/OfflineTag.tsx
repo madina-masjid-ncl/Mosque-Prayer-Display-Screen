@@ -25,7 +25,7 @@ function OfflineTag() {
     }
   }, [])
 
-  const ifOffline = isOfflineData || !online || true
+  const ifOffline = isOfflineData || !online
 
   return (
     <div
