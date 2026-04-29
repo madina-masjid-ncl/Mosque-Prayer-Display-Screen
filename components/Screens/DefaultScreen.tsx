@@ -1,21 +1,8 @@
-import type {
-  DailyPrayerTime,
-  UpcomingPrayerTimes,
-} from "@/types/DailyPrayerTimeType"
-import {
-  getConfiguration,
-  getJummahTimes,
-  getMetaData,
-  getPrayerTimesForToday,
-  getPrayerTimesForTomorrow,
-  getPrayerTimesForUpcomingDays,
-} from "@/services/MosqueDataService"
-import type { JummahTimes } from "@/types/JummahTimesType"
-import type { MosqueMetadataType } from "@/types/MosqueDataType"
+"use client"
+
 import { ConfigurationJson } from "@/types/ConfigurationType"
 import SunriseJummahTiles from "@/components/SunriseJummahTiles/SunriseJummahTiles"
 import UpcomingPrayerDayTiles from "@/components/UpcomingPrayerDayTiles/UpcomingPrayerDayTiles"
-import { ConfigurationProvider } from "@/providers/ConfigurationProvider"
 import Clock from "@/components/Clock/Clock"
 import Date from "@/components/Date/Date"
 import MosqueMetadata from "@/components/MosqueMetadata/MosqueMetadata"
@@ -25,24 +12,22 @@ import SlidingBanner from "@/components/SlidingBanner/SlidingBanner"
 import ServiceWorker from "@/components/ServiceWorker/ServiceWorker"
 import Announcement from "@/components/Announcement/Announcement"
 import Blackout from "@/components/Blackout/Blackout"
+import { useContext } from "react"
+import { ScreenMosqueDataContext } from "@/providers/ScreenMosqueDataProvider"
+import OfflineTag from "@/components/OfflineTag/OfflineTag"
 
 
 interface DefaultScreenProps {
   config: ConfigurationJson
 }
 
-export default async function DefaultScreen({ config }: DefaultScreenProps) {
-  const today: DailyPrayerTime = await getPrayerTimesForToday()
-  const tomorrow: DailyPrayerTime = await getPrayerTimesForTomorrow()
-  const jummahTimes: JummahTimes = await getJummahTimes()
-  const mosqueMetadata: MosqueMetadataType = await getMetaData()
-  const upcomingPrayerDays: UpcomingPrayerTimes[] =
-    await getPrayerTimesForUpcomingDays()
+export default function DefaultScreen({ config }: DefaultScreenProps) {
+  const { today, tomorrow, mosqueMetadata, jummahTimes, upcomingPrayerDays } = useContext(ScreenMosqueDataContext)
 
   let slides = [
     <SunriseJummahTiles
-      sunrise={today.sunrise_start}
-      jummahTimes={jummahTimes}
+      sunrise={today?.sunrise_start ?? ""}
+      jummahTimes={jummahTimes ?? []}
       key={"sunrise_jummah_times"}
     />,
   ]
@@ -65,14 +50,16 @@ export default async function DefaultScreen({ config }: DefaultScreenProps) {
               <Date />
             </div>
             <div className="p-4 md:p-6 2k:p-[1.5vh]">
-              <MosqueMetadata metadata={mosqueMetadata} />
+              {mosqueMetadata && <MosqueMetadata metadata={mosqueMetadata} />}
             </div>
             <div className="hidden md:p-6 md:block 2k:p-[1.5vh]">
               <Notice />
             </div>
           </div>
           <div className="p-4 md:p-6 md:col-span-5">
-            <PrayerTimes today={today} tomorrow={tomorrow} />
+            {today && tomorrow && (
+              <PrayerTimes today={today} tomorrow={tomorrow} />
+            )}
           </div>
         </div>
         <div className="shrink-0 p-4 md:p-6">
@@ -81,7 +68,10 @@ export default async function DefaultScreen({ config }: DefaultScreenProps) {
         <ServiceWorker />
       </main>
       {config.feature.announcement.enabled && <Announcement />}
-      <Blackout prayerTimeToday={today} />
+      {today && <Blackout prayerTimeToday={today} />}
+      <div className={"fixed bottom-1 right-1"}>
+        <OfflineTag />
+      </div>
     </div>
   )
 }

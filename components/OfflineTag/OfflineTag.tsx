@@ -25,7 +25,7 @@ function OfflineTag() {
     }
   }, [])
 
-  const ifOffline = isOfflineData || !online
+  const ifOffline = isOfflineData || !online || true
 
   return (
     <div
@@ -35,8 +35,8 @@ function OfflineTag() {
         ifOffline ? "flex" : "opacity-0",
       )}
     >
-      <span className={"rounded-[50px] bg-red-400 w-4 h-4"} />
-      <span className={"text-xs text-mosqueBrand-onPrimary/50"}>
+      <span className={"rounded-[50vw] bg-red-400 w-[1vh] h-[1vh] aspect-square"} />
+      <span className={"text-xs 2x:text-lg 4k:text-xl text-mosqueBrand-onPrimary/50"}>
         Device offline
       </span>
     </div>

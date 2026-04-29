@@ -1,6 +1,7 @@
 import { ConfigurationJson } from "@/types/ConfigurationType"
 import DefaultScreen from "@/components/Screens/DefaultScreen"
 import MobileScreenLayout from "@/components/Screens/Mobile/MobileScreenLayout"
+import ScreenProviderWrapper from "@/components/Screens/ScreenProviderWrapper"
 
 interface ScreenFactoryProps {
   config: ConfigurationJson
@@ -22,5 +23,9 @@ export default async function ScreenFactory({ config }: ScreenFactoryProps) {
 function DesktopScreenFactory({
   config,
 }: ScreenFactoryProps) {
-  return <DefaultScreen config={config} />
+  return (
+    <ScreenProviderWrapper>
+      <DefaultScreen config={config} />
+    </ScreenProviderWrapper>
+  )
 }
