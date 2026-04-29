@@ -28,7 +28,7 @@ export const ScreenMosqueDataContext =
 
 type ProviderProps = React.PropsWithChildren<ScreenMosqueDataProviderValue>
 
-function deriveFromMosqueData(mosqueData: MosqueData, upcomingDays = 3) {
+function deriveFromMosqueData(mosqueData: MosqueData, upcomingDays = 0) {
   const now = dtNowLocale()
 
   const getPrayerTimeForDayMonth = (
@@ -83,7 +83,8 @@ export function ScreenMosqueDataProvider({
         const mosqueData: MosqueData = await res.json()
         console.log("loaded mosque data from /api/data", mosqueData)
 
-        const derived = deriveFromMosqueData(mosqueData, 3)
+
+        const derived = deriveFromMosqueData(mosqueData, 0)
 
         if (cancelled) return
         setState({
